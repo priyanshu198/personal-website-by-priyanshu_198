@@ -204,12 +204,13 @@
 		</div>
 
 		<div class="contact-form">
-			<form action="mailto:priyanshuraj198@gmail.com" method="post" enctype="text/plain">
+			<form name="submit-to-google-sheet" method="post" enctype="text/plain">
 				<input type="text" placeholder="Enter Your Name" required>
 				<input type="email" placeholder="Enter Your Email" required>
 				<input type="text" placeholder="Enter Your Subject">
 				<textarea name="" id="" cols="30" rows="10" placeholder="Enter Your Message" required></textarea>
 				<input type="submit" value="Submit" class="send">
+		
 			</form>
 		</div>
 	</section>
@@ -225,6 +226,17 @@
 
 	<!---custom js link--->
 	<script type="text/javascript" src="js/script.js"></script>
+	<script>
+  const scriptURL = '<https://script.google.com/macros/s/AKfycbwaFI8yhH4LsbAY5FoAeEgKi8MCm7PaZZdwz2BeL7id7JjCw5cIzPyxXjiJ9B1nf9IrAw/exec>'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
 
 </body>
 </html>
